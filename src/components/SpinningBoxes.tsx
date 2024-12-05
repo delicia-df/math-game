@@ -42,8 +42,9 @@ const getTextWidth = (text: string, font) =>{
 const Box: React.FC<BoxProps> = ({ position, text, font }) => {
     const meshRef = useRef<any>(null);
     useFrame(() => {
-        meshRef.current.rotation.x += 0.01;
-        meshRef.current.rotation.y += 0.01;
+        meshRef.current.rotation.x += 0.02;
+        meshRef.current.rotation.y += 0.02;
+        meshRef.current.rotation.y += 0.02;
     });
     const textGeometry = new TextGeometry(text, {
         font,
@@ -69,10 +70,6 @@ const Box: React.FC<BoxProps> = ({ position, text, font }) => {
 
 const SpinningBoxes = ({textArray}:{textArray:string[]}) => {
     const font = new FontLoader().parse(fontData);
-
-    // const textArray = ['135.07', '+', '34053', '=', '?'];
-    //   const numbersArray = ['135.07'];
-    console.log("xoffsets",textArray.map(text => getTextWidth(text, font)))
     const xOffsets = sumBelowIndex(textArray.map(text => getTextWidth(text, font)))
     return (
         <div style={{ background: "gray" }}>
@@ -82,12 +79,7 @@ const SpinningBoxes = ({textArray}:{textArray:string[]}) => {
                 <pointLight position={[0, 0, 5]} intensity={0.5} />
                 <group position={[-3, 0, 0]}>
                     {textArray.map((text, index) => {
-                        // const nextText = index < numbersArray.length-1 ? numbersArray[index+1] : "0"
-                        // const currentTextWidth = getTextWidth(text, font);
-                        // const nextTextWidth = getTextWidth(nextText, font);
-                        // xOffset += currentTextWidth;
-                        // console.log("xoffset",text, nextText, xOffset)
-                        console.log("xOffsets",xOffsets[index], index, xOffsets)
+
                         return (
                             <Box key={index}
                                 position={[xOffsets[index], 0, 0]} text={text} font={font} />
