@@ -1,6 +1,6 @@
 // Math utility functions
 export function generateQuestion(level: number): {
-  question: string;
+  question: string[];
   answer: number;
 } {
   const operations = ['+', '-', '*', '/'];
@@ -30,7 +30,7 @@ export function generateQuestion(level: number): {
   }
   
   return {
-    question: `${num1} ${operation} ${num2}`,
+    question: [num1+"", operation, num2+""], //`${num1} ${operation} ${num2}`,
     answer
   };
 }

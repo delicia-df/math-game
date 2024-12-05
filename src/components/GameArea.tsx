@@ -1,5 +1,5 @@
 import { FallingQuestion } from '@/components/FallingQuestion';
-import { GameUI } from '@/components/GameUI';
+import { GameUI } from '@/components/GameUI'; 
 
 interface GameAreaProps {
   questions: Array<{ id: number; question: string; answer: number }>;

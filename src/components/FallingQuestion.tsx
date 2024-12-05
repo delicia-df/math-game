@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
 
+import SpinningBoxes from './SpinningBoxes'
+
 interface FallingQuestionProps {
   question: string;
   speed: number;
@@ -17,7 +19,7 @@ export function FallingQuestion({
 }: FallingQuestionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(0);
-  const [left, _] = useState(`${Math.random()*80}%`);
+  const [left, _] = useState(`${Math.random() * 80}%`);
   const startTimeRef = useRef<number | null>(null);
   const lastFrameTimeRef = useRef<number | null>(null);
 
@@ -62,17 +64,16 @@ export function FallingQuestion({
     <Card
       ref={ref}
       className={cn(
-        'fixed px-6 py-3 text-lg font-bold z-10',
-        'hover:scale-105 cursor-pointer shadow-lg',
-        'bg-primary text-primary-foreground'
+        'fixed px-6 py-3 '
       )}
       style={{
-        left: left,
+        left: 'calc(100vw/6)',
         top: 0,
         transform: `translateY(${position}px)`,
       }}
     >
-      {question}
+      <SpinningBoxes textArray={question} />
+      {/* {question} */}
     </Card>
   );
 }
