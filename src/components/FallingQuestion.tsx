@@ -17,6 +17,7 @@ export function FallingQuestion({
 }: FallingQuestionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(0);
+  const [left, _] = useState(`${Math.random()*80}%`);
   const startTimeRef = useRef<number | null>(null);
   const lastFrameTimeRef = useRef<number | null>(null);
 
@@ -61,12 +62,12 @@ export function FallingQuestion({
     <Card
       ref={ref}
       className={cn(
-        ' px-6 py-3 text-lg font-bold z-10',
+        'fixed px-6 py-3 text-lg font-bold z-10',
         'hover:scale-105 cursor-pointer shadow-lg',
         'bg-primary text-primary-foreground'
       )}
       style={{
-        left: '200px',
+        left: left,
         top: 0,
         transform: `translateY(${position}px)`,
       }}

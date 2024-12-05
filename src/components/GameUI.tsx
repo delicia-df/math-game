@@ -44,6 +44,7 @@ export function GameUI({ level, score, lives, onAnswer }: GameUIProps) {
         <form onSubmit={handleSubmit} className="flex gap-2">
           <Input
             type="number"
+            step=".0001"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Enter answer..."
