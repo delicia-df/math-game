@@ -17,7 +17,7 @@ const getTextWidth = (text: string, font) =>{
     const textGeometry = new TextGeometry(text, {
         font,
         size: 1,
-        height: 0.01,
+        depth : 0.01,
         curveSegments: 12,
     });
     textGeometry.computeBoundingBox();
@@ -67,14 +67,12 @@ const Box: React.FC<BoxProps> = ({ position, text, font, speed }) => {
     const textGeometry = new TextGeometry(text, {
         font,
         size: 1,
-        height: 0.01,
+        depth : 0.01,
         curveSegments: 12,
     });
     textGeometry.computeBoundingBox();
     const textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-    console.log(textGeometry.parameters.options, textWidth)
     const boxWidth = textWidth + 1; // Add 1 unit of padding
-    console.log("texture",props)
     return (
         <mesh ref={meshRef} position={position}>
             <boxGeometry args={[boxWidth, 2, 0.5]} />
