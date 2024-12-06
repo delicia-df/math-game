@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import SpinningBoxes from './SpinningBoxes'
 
 interface FallingQuestionProps {
-  question: string;
+  question: string[];
   speed: number;
   onMiss: () => void;
   onRemove: () => void;
@@ -19,9 +19,20 @@ export function FallingQuestion({
 }: FallingQuestionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(0);
-  const [left, _] = useState(`${Math.random() * 80}%`);
   const startTimeRef = useRef<number | null>(null);
   const lastFrameTimeRef = useRef<number | null>(null);
+  const [isMissed, setMissed] = useState(false);
+
+  useEffect(() => {
+    if (isMissed) {
+      onRemove();
+      onMiss();
+    }
+  }, [isMissed])
+
+  useEffect(() => {
+    setMissed(false)
+  }, [question.join("")])
 
   useEffect(() => {
     const element = ref.current;
@@ -42,8 +53,7 @@ export function FallingQuestion({
         const newPosition = prev + (deltaTime * speed) / 1000;
 
         if (newPosition > window.innerHeight) {
-          onMiss();
-          onRemove();
+          setMissed(true)
           return prev;
         }
 
@@ -67,13 +77,12 @@ export function FallingQuestion({
         'fixed px-6 py-3 '
       )}
       style={{
-        left: 'calc(100vw/6)',
         top: 0,
-        transform: `translateY(${position}px)`,
+        left: '50%',
+        transform: `translateX(-50%) translateY(${position}px)`,
       }}
     >
       <SpinningBoxes textArray={question} speed={speed} />
-      {/* {question} */}
     </Card>
   );
 }

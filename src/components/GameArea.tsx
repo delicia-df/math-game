@@ -2,7 +2,7 @@ import { FallingQuestion } from '@/components/FallingQuestion';
 import { GameUI } from '@/components/GameUI'; 
 
 interface GameAreaProps {
-  questions: Array<{ id: number; question: string; answer: number }>;
+  questions: Array<{ id: number; question: string[]; answer: number }>;
   level: number;
   score: number;
   lives: number;
