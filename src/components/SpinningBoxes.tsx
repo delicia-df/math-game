@@ -8,6 +8,7 @@ interface BoxProps {
     position: [number, number, number];
     text: string;
     font: any;
+    speed: number;
 }
 
 const getTextWidth = (text: string, font) =>{
@@ -39,12 +40,13 @@ const getTextWidth = (text: string, font) =>{
     return result;
   }
 
-const Box: React.FC<BoxProps> = ({ position, text, font }) => {
+const Box: React.FC<BoxProps> = ({ position, text, font, speed }) => {
     const meshRef = useRef<any>(null);
     useFrame(() => {
-        meshRef.current.rotation.x += 0.02;
-        meshRef.current.rotation.y += 0.02;
-        meshRef.current.rotation.y += 0.02;
+        const rotationSpeed= speed*0.0005
+        meshRef.current.rotation.x += rotationSpeed;
+        meshRef.current.rotation.y += rotationSpeed;
+        meshRef.current.rotation.y += rotationSpeed;
     });
     const textGeometry = new TextGeometry(text, {
         font,
@@ -68,12 +70,11 @@ const Box: React.FC<BoxProps> = ({ position, text, font }) => {
     );
 };
 
-const SpinningBoxes = ({textArray}:{textArray:string[]}) => {
+const SpinningBoxes = ({textArray,speed}:{textArray:string[],speed:number}) => {
     const font = new FontLoader().parse(fontData);
     const xOffsets = sumBelowIndex(textArray.map(text => getTextWidth(text, font)))
     return (
         <div style={{ background: "gray" }}>
-
             <Canvas style={{width: xOffsets[xOffsets.length-1]*40, height: 100}} camera={{ position: [0, 0, 4] }}>
                 <ambientLight intensity={10} />
                 <pointLight position={[0, 0, 5]} intensity={0.5} />
@@ -82,6 +83,7 @@ const SpinningBoxes = ({textArray}:{textArray:string[]}) => {
 
                         return (
                             <Box key={index}
+                            speed={speed}
                                 position={[xOffsets[index], 0, 0]} text={text} font={font} />
                         )
                     })}

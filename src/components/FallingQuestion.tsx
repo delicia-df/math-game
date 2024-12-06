@@ -72,7 +72,7 @@ export function FallingQuestion({
         transform: `translateY(${position}px)`,
       }}
     >
-      <SpinningBoxes textArray={question} />
+      <SpinningBoxes textArray={question} speed={speed} />
       {/* {question} */}
     </Card>
   );

@@ -52,7 +52,7 @@ export function useGameState() {
         description: `You've reached level ${level + 1}!`,
       });
     }
-  }, [score, level, toast]);
+  }, [score]);
 
   const handleAnswer = (answer: number) => {
     const question = questions[0];
