@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { generateQuestion } from '@/lib/math';
 
+
 interface Question {
   id: number;
-  question: string;
+  question: string[];
   answer: number;
 }
 
@@ -54,7 +55,7 @@ export function useGameState() {
     }
   }, [score]);
 
-  const handleAnswer = (answer: number) => {
+  const handleAnswer = (answer: number, promptModel: any) => {
     const question = questions[0];
     if (!question) return;
 
@@ -74,6 +75,18 @@ export function useGameState() {
         variant: "destructive",
       });
 
+      promptModel(`${question.question.join(" ")} = ?`)
+        .then((text: any) => {
+          if (text) {
+            toast({
+              title: "AI Tip",
+              description: text,
+              variant: "default",
+            });
+          }
+        })
+
+
       if (lives <= 1) {
         setGameOver(true);
       } else {
@@ -85,7 +98,7 @@ export function useGameState() {
   const handleMiss = () => {
     setLives(prev => prev - 1);
     setQuestions([]); // Clear the missed question
-    
+
     if (lives <= 1) {
       setGameOver(true);
       toast({
