@@ -12,7 +12,7 @@ export function useMlcAIState() {
     const promptModel = async (question: string) => {
         if (engine) {
             let reply = await engine.chat.completions.create({
-                messages: [{ role: "user", content: `Explain and expand a shortcut solution to solve the problem: ${question} ` }],
+                messages: [{ role: "user", content: `Mention a airthmetic operation trick ` }],
             });
 
             const replyMsg = reply?.choices[0].message.content
