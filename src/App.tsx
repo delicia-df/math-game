@@ -21,7 +21,7 @@ function MLCmp({ setModelDownloadProgress, setEngine }:
         setModelDownloadProgress(initProgress?.progress)
       }
 
-      let selectedModel = "TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC-1k";
+      let selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
       // Use a WebWorkerMLCEngine instead of MLCEngine here
       engine = await CreateWebWorkerMLCEngine(
         new Worker(

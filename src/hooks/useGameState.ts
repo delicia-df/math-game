@@ -33,6 +33,14 @@ export function useGameState() {
     }
   }, [level, questions.length]);
 
+  useEffect(()=>{
+    toast({
+      title: "Loading AI Model",
+      description: `Fist time loading of Local AI Model takes around 10 minutes`,
+      duration: 2000
+    });
+  },[])
+
   useEffect(() => {
     if (gameOver) return;
 
@@ -66,6 +74,7 @@ export function useGameState() {
         title: "Correct!",
         description: "+10 points",
         variant: "default",
+        duration: 1000
       });
     } else {
       setLives(prev => prev - 1);
@@ -73,6 +82,7 @@ export function useGameState() {
         title: "Wrong!",
         description: `The correct answer was ${question.answer}`,
         variant: "destructive",
+        duration: 2000
       });
 
       promptModel(`${question.question.join(" ")} = ?`)
@@ -82,6 +92,7 @@ export function useGameState() {
               title: "AI Tip",
               description: text,
               variant: "default",
+              duration: 20000
             });
           }
         })
