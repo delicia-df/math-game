@@ -5,15 +5,12 @@ import { useMlcAIState } from '@/hooks/useMlcAIState';
 
 import { CreateWebWorkerMLCEngine, WebWorkerMLCEngine, ChatCompletionMessageParam } from "@mlc-ai/web-llm";
 import { useEffect } from 'react';
-import { useToast } from '@/hooks/use-toast';
 let mlInitiated = false;
 function MLCmp({ setModelDownloadProgress, setEngine }:
   {
     setModelDownloadProgress: React.Dispatch<React.SetStateAction<number>>,
     setEngine: React.Dispatch<React.SetStateAction<WebWorkerMLCEngine | null>>
   }) {  
-    const { toast } = useToast();
-
 
   useEffect(() => {
 
@@ -102,12 +99,7 @@ function MLCmp({ setModelDownloadProgress, setEngine }:
       });
       console.log(reply?.choices[0].message);
       console.log(reply?.usage);
-      toast({
-        title: "AI Tip",
-        description: reply?.choices[0].message,
-        variant: "default",
-        duration: 20000
-      });
+
      
 
 
