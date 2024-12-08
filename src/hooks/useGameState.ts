@@ -36,7 +36,7 @@ export function useGameState() {
   useEffect(()=>{
     toast({
       title: "Loading AI Model",
-      description: `Fist time loading of Local AI Model takes around 10 minutes`,
+      description: `Fist time loading of Local AI 1GB Model takes around few minutes`,
       duration: 2000
     });
   },[])
@@ -85,7 +85,7 @@ export function useGameState() {
         duration: 2000
       });
 
-      promptModel(`${question.question.join(" ")} = ?`)
+      promptModel(` Explain how to solve arithmetic problem ${question.question.join(" ")} = ? in a efficient shortcut way`)
         .then((text: any) => {
           if (text) {
             toast({

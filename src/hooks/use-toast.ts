@@ -153,7 +153,6 @@ function toast({ ...props }: Toast) {
       id,
       open: true,
       onOpenChange: (open) => {
-        console.trace();
         if (!open) dismiss();
       },
     },
